@@ -37,17 +37,15 @@ public class UserControllerTest {
     }
 
     @Test
-    public void whenGetAll_ThenReturnAllUsers() {
-        ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
-        assertEquals(0, response.getBody().length);
-    }
-
-    @Test
     public void whenCreateUser_ThenReturnNewUser(){
         HttpEntity<User> userHttpEntity = new HttpEntity<>(new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com"));
-        User user = template.postForObject(baseURL.toString(), userHttpEntity, User.class);
 
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
+        assertEquals(0, response.getBody().length);
+
+        User user = template.postForObject(baseURL.toString(), userHttpEntity, User.class);
+
+        response = template.getForEntity(baseURL.toString(), User[].class);
         assertEquals(1, response.getBody().length);
 
     }
