@@ -24,7 +24,4 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @PutMapping
-    public 
-
 }
