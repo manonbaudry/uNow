@@ -1,5 +1,6 @@
 package com.uNow.controller;
 
+import com.uNow.UNowApplication;
 import com.uNow.entities.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,8 @@ import java.net.URL;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = UNowApplication.class,
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserControllerTest {
 
     @LocalServerPort
