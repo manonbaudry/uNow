@@ -1,6 +1,6 @@
 package com.uNow.controller;
 
-import com.uNow.User;
+import com.uNow.entities.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -37,5 +38,15 @@ public class UserControllerTest {
     public void whenGetAll_ThenReturnAllUsers() {
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
         assertEquals(0, response.getBody().length);
+    }
+
+    @Test
+    public void whenCreateUser_ThenReturnNewUser(){
+        HttpEntity<User> userHttpEntity = new HttpEntity<>(new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com"));
+        User user = template.postForObject(baseURL.toString(), userHttpEntity, User.class);
+
+        ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
+        assertEquals(1, response.getBody().length);
+
     }
 }
