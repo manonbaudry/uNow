@@ -5,27 +5,28 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Activity {
 
     @Id
     @GeneratedValue
     private long id;
 
     @NonNull
-    private String firstName;
+    @ManyToOne
+    private User user;
 
     @NonNull
-    private String lastName;
+    private ActivityType type;
 
     @NonNull
-    private String email;
+    private Date date;
+
 
 }
