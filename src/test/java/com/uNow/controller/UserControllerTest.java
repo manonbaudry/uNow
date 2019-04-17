@@ -41,12 +41,12 @@ public class UserControllerTest {
         HttpEntity<User> userHttpEntity = new HttpEntity<>(new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com"));
 
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
-        assertEquals(0, response.getBody().length);
+        assertEquals(2, response.getBody().length);
 
         User user = template.postForObject(baseURL.toString(), userHttpEntity, User.class);
 
         response = template.getForEntity(baseURL.toString(), User[].class);
-        assertEquals(1, response.getBody().length);
+        assertEquals(3, response.getBody().length);
 
     }
 }
