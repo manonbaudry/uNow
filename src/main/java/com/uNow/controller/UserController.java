@@ -13,15 +13,18 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @CrossOrigin
     @GetMapping
     public List<User> getAll() {
         return userRepository.findAll();
 
     }
 
+    @CrossOrigin
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
     }
+
 
 }
