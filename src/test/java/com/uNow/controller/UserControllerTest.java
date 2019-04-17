@@ -33,7 +33,7 @@ public class UserControllerTest {
 
     @Before
     public void setUp() throws MalformedURLException {
-        this.baseURL = new URL("http://localhost:" + port + "/");
+        this.baseURL = new URL("http://localhost:" + port + "/user");
     }
 
     @Test
@@ -43,10 +43,14 @@ public class UserControllerTest {
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
         assertEquals(2, response.getBody().length);
 
-        User user = template.postForObject(baseURL.toString(), userHttpEntity, User.class);
+        template.postForObject(baseURL.toString(), userHttpEntity, User.class);
 
         response = template.getForEntity(baseURL.toString(), User[].class);
         assertEquals(3, response.getBody().length);
 
+    }
+
+    @Test
+    public void whenDeleteUser_ThenUserLess() {
     }
 }
