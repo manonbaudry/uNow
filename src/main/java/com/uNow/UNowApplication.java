@@ -19,8 +19,9 @@ public class UNowApplication {
     @Bean
     CommandLineRunner init (UserRepository userRepository){
         return args -> {
-            userRepository.save(new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com"));
-            userRepository.save(new User("Arnaud", "Bascop", "nonoDu59@gmail.com"));
+            userRepository.save(new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com", "azerty" ,"7 rue du Levrier", "admin", "0000000000"));
+            userRepository.save(new User("Arnaud", "Bascop", "nonoDu59@gmail.com", "azerty", "52 rua de Heroismo", "user", "0605436459"));
+            userRepository.save(new User("Arnaud", "Bascop", "nonoDu59@gmail.com", "azerty","52 rua de Heroismo", "user", "0605436459"));
         };
     }
 

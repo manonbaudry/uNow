@@ -28,5 +28,4 @@ public class Activity {
     @NonNull
     private Date date;
 
-
 }

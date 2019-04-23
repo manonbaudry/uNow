@@ -22,13 +22,21 @@ public class UserController {
 
     @CrossOrigin
     @GetMapping("/{id}")
-    public User findById(@PathVariable Long id) {
+    public User findById(@PathVariable long id) {
         return userRepository.getOne(id);
+    }
+// Vérification jamais même adresse mail?
+    @CrossOrigin
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @CrossOrigin
     @PostMapping
     public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+        if(userRepository.findByEmail(user.getEmail()) == null)
+            return userRepository.save(user);
+        else
+            return null;
     }
 }

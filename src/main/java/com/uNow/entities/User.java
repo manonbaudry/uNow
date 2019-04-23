@@ -28,4 +28,15 @@ public class User {
     @NonNull
     private String email;
 
+    @NonNull
+    private String password;
+
+    @NonNull
+    private String location;
+
+    @NonNull
+    private String role;
+
+    @NonNull
+    private String phoneNumber;
 }
