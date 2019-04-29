@@ -1,5 +1,6 @@
 package com.uNow.entities;
 
+import com.uNow.annotations.UniqueEmail;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -26,6 +27,7 @@ public class User {
     private String lastName;
 
     @NonNull
+    @UniqueEmail
     private String email;
 
     @NonNull
