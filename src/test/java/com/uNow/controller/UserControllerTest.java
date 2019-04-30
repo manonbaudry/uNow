@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -50,6 +51,11 @@ public class UserControllerTest {
         assertEquals(4, response.getBody().length);
     }
 
+    @Test
+    public void whenFindUserById_ThenReturnUser() {
+        ResponseEntity<String> response = template.getForEntity(baseURL.toString() + "/1", String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
 
     @Test
     public void whenCreateUserWithAlreadyExistEmail_ThenThrowException() {
