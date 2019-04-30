@@ -50,6 +50,7 @@ public class UserControllerTest {
         assertEquals(4, response.getBody().length);
     }
 
+
     @Test
     public void whenCreateUserWithAlreadyExistEmail_ThenThrowException() {
         ResponseEntity<User[]> response1 = template.getForEntity(baseURL.toString(), User[].class);

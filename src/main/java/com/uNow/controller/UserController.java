@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @CrossOrigin
-    @GetMapping("/{id}")
+    @GetMapping("/id")
     public User findById(@PathVariable long id) {
         return userRepository.findById(id);
     }
@@ -32,6 +32,7 @@ public class UserController {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
 
     @CrossOrigin
     @PostMapping
