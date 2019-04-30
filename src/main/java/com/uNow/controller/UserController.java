@@ -24,7 +24,7 @@ public class UserController {
     @CrossOrigin
     @GetMapping("/{id}")
     public User findById(@PathVariable long id) {
-        return userRepository.getOne(id);
+        return userRepository.findById(id);
     }
 
 
