@@ -13,11 +13,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -34,8 +31,6 @@ public class UserControllerTest {
     @Autowired
     private TestRestTemplate template;
 
-    @Autowired
-    private Validator validator;
 
     @Before
     public void setUp() throws MalformedURLException {
@@ -53,15 +48,15 @@ public class UserControllerTest {
 
         response = template.getForEntity(baseURL.toString(), User[].class);
         assertEquals(4, response.getBody().length);
-
     }
 
     @Test
-    public void shouldValidateDuplicatedLogin() throws Exception {
-        User newUser = new User("Jackie", "Kennedy", "man.baudry@ŋmail.com", "azerty", "Saint Amand", "lapin", "0631440224");
-        Set<ConstraintViolation<User>> violations = validator.validate(newUser);
-        // then
-        assertEquals(1, violations.size());
+    public void whenCreateUserWithAlreadyExistEmail_ThenThrowException() {
+        HttpEntity<User> userHttpEntity = new HttpEntity<>(new User("Jackie", "Kennedy", "man.baudry@gmail.com", "azerty", "Saint Amand", "lapin", "0631440224"));
+        template.postForObject(baseURL.toString(), userHttpEntity, User.class);
+
+        ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
+        assertEquals(3, response.getBody().length);
     }
 
 }
