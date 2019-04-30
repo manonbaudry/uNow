@@ -52,11 +52,13 @@ public class UserControllerTest {
 
     @Test
     public void whenCreateUserWithAlreadyExistEmail_ThenThrowException() {
+        ResponseEntity<User[]> response1 = template.getForEntity(baseURL.toString(), User[].class);
+        System.out.println(response1.getBody().length);
         HttpEntity<User> userHttpEntity = new HttpEntity<>(new User("Jackie", "Kennedy", "man.baudry@gmail.com", "azerty", "Saint Amand", "lapin", "0631440224"));
         template.postForObject(baseURL.toString(), userHttpEntity, User.class);
 
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
-        assertEquals(3, response.getBody().length);
+        assertEquals(4, response.getBody().length);
     }
 
 }
