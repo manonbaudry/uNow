@@ -5,5 +5,5 @@ deploy:
   api_key:
     secure: BQhe91lxqR5HQGXb8vp529y76qIXOK41XRUwuhTDLA5grNYwBaJQ4gSzsPdVIoEP+fpsSPF+Z8dvoPMTsMbXgng7H1X8zmpA81q6ByGHgsrHhXis7hD+RKWH5ZCsFqVo77068GMMpnKH5qRfBAg4mbYmXMzGcGJ0EFyfn5FfOynAb8oOCkUZXxXf2gYIJRonq0mdP2x3iZIEfBU0ozNvnBVnIWeNpjVb/GFhiWmkBGKJwcT9xCwta9nfJRTrwu2N/qBWAXZcxDOwdvahJABAifSPujKjq13BWDXqTq9O+S1BgS/AHb3J15dEujlCDVtMBM+8znvihVGh1xS59KNXq/8P7MUzisQRWMa6s7UixqxbDCuCn2020O3hpjB33nL3qvyCPe787kZ1xjgRIvFVjvBmIVtxvwOFhNwiE/QLgekBbYZtwBR4FCsF3Nixi0mDm6imgD+cmpE95CiYo/fqGf/aLklFmmAkJwwVlxrEJyD953u+9B1hYI365gc5bJrhaNPPB0/o08ohUQ95QutjrdxzJyUMaODbxsLeW7Pvx0exACpI5NJ2CKRbzZ8hxiYV6h1Icd9H5GBQQii9JuUw/eHowkKEb/IdvvvvlUEXwiwWe1rP9yiQ9gm1zwuBVUqt2v7IWngdg1f3/qriu9yBjsTBFZT832jguH/Hrxp0CDA=
   app: unow-api
-  after_success:
-  - bash <(curl -s https://codecov.io/bash)
+after_success:
+ - bash <(curl -s https://codecov.io/bash)
