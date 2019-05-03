@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
+
 
 @SpringBootApplication
 public class UNowApplication {
@@ -19,9 +21,9 @@ public class UNowApplication {
     @Bean
     CommandLineRunner init (UserRepository userRepository){
         return args -> {
-            userRepository.save(new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com", "azerty", "7 rue du Levrier", "0000000000", null, null, null));
-            userRepository.save(new User("Arnaud", "Bascop", "nonoDu59@gmail.com", "azerty", "52 rua de Heroismo", "0605436459", null, null, null));
-            userRepository.save(new User("Manon", "Baudry", "man.baudry@gmail.com", "azerty", "52 rua de Heroismo", "0679065306", null, null, null));
+            userRepository.save(new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com", "azerty", "7 rue du Levrier", "0000000000", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+            userRepository.save(new User("Arnaud", "Bascop", "nonoDu59@gmail.com", "azerty", "52 rua de Heroismo", "0605436459", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+            userRepository.save(new User("Manon", "Baudry", "man.baudry@gmail.com", "azerty", "52 rua de Heroismo", "0679065306", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         };
     }
 

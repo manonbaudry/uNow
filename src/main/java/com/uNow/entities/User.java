@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -40,13 +39,13 @@ public class User {
 
     @NonNull
     @OneToMany
-    private Set<User> friends;
+    private List<User> friends;
 
     @NonNull
     @OneToMany
-    private Set<Activity> activities;
+    private List<Activity> activities;
 
     @NonNull
     @OneToMany
-    private Set<User> friendsRequest;
+    private List<User> friendsRequest;
 }
