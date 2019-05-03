@@ -27,13 +27,6 @@ public class UserController {
         return userRepository.findById(id);
     }
 
-
-    @CrossOrigin
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-
     @CrossOrigin
     @PostMapping
     public User createUser(@RequestBody User user) throws AlreadyExistEmailException {
@@ -55,7 +48,7 @@ public class UserController {
         userRepository.findById(user.getId()).setPhoneNumber(user.getPhoneNumber());
         return userRepository.findById(user.getId());
     }
-
+/*
     @CrossOrigin
     @PutMapping
     public User updateUserFriend(@RequestBody User user) {
@@ -68,5 +61,5 @@ public class UserController {
     public User updateUserFriendRequest(@RequestBody User user) {
         userRepository.findById(user.getId()).setFriendsRequest(user.getFriendsRequest());
         return userRepository.findById(user.getId());
-    }
+    }*/
 }

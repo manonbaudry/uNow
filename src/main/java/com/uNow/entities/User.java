@@ -5,10 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -38,13 +37,16 @@ public class User {
     @NonNull
     private String phoneNumber;
 
-    @NonNull
-    private List<User> friends;
 
     @NonNull
-    private List<Activity> activities;
+    @OneToMany
+    private Set<User> friends;
 
     @NonNull
-    private List<User> friendsRequest;
+    @OneToMany
+    private Set<Activity> activities;
 
+    @NonNull
+    @OneToMany
+    private Set<User> friendsRequest;
 }
