@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.List;
 
 @Data
 @Entity
@@ -35,8 +36,15 @@ public class User {
     private String location;
 
     @NonNull
-    private String role;
+    private String phoneNumber;
 
     @NonNull
-    private String phoneNumber;
+    private List<User> friends;
+
+    @NonNull
+    private List<Activity> activities;
+
+    @NonNull
+    private List<User> friendsRequest;
+
 }

@@ -44,4 +44,29 @@ public class UserController {
         throw new AlreadyExistEmailException("The given email is already in use");
 
     }
+
+    @CrossOrigin
+    @PutMapping
+    public User updateUserInformation(@RequestBody User user) {
+        userRepository.findById(user.getId()).setFirstName(user.getFirstName());
+        userRepository.findById(user.getId()).setLastName(user.getLastName());
+        userRepository.findById(user.getId()).setEmail(user.getEmail());
+        userRepository.findById(user.getId()).setPassword(user.getPassword());
+        userRepository.findById(user.getId()).setPhoneNumber(user.getPhoneNumber());
+        return userRepository.findById(user.getId());
+    }
+
+    @CrossOrigin
+    @PutMapping
+    public User updateUserFriend(@RequestBody User user) {
+        userRepository.findById(user.getId()).setFriends(user.getFriends());
+        return userRepository.findById(user.getId());
+    }
+
+    @CrossOrigin
+    @PutMapping
+    public User updateUserFriendRequest(@RequestBody User user) {
+        userRepository.findById(user.getId()).setFriendsRequest(user.getFriendsRequest());
+        return userRepository.findById(user.getId());
+    }
 }
