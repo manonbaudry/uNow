@@ -36,7 +36,6 @@ public class User {
     @NonNull
     private String phoneNumber;
 
-
     @NonNull
     @OneToMany
     private List<User> friends;
@@ -44,6 +43,8 @@ public class User {
     @NonNull
     @OneToMany
     private List<Activity> activities;
+
+    //Créer un nouvel objet
 
     @NonNull
     @OneToMany

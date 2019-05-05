@@ -26,6 +26,7 @@ public class UserController {
     @CrossOrigin
     @GetMapping("/{id}")
     public User findById(@PathVariable("id") long id) {
+        //ici on renvoit l'exception
         return userRepository.findById(id);
     }
 
@@ -41,19 +42,8 @@ public class UserController {
             return user;
         }
         throw new AlreadyExistEmailException("The given email is already in use");
-
     }
 
-    @CrossOrigin
-    @PutMapping
-    public User updateUserInformation(@RequestBody User user) {
-        userRepository.findById(user.getId()).setFirstName(user.getFirstName());
-        userRepository.findById(user.getId()).setLastName(user.getLastName());
-        userRepository.findById(user.getId()).setEmail(user.getEmail());
-        userRepository.findById(user.getId()).setPassword(user.getPassword());
-        userRepository.findById(user.getId()).setPhoneNumber(user.getPhoneNumber());
-        return userRepository.findById(user.getId());
-    }
 /*
     @CrossOrigin
     @PutMapping
@@ -68,4 +58,30 @@ public class UserController {
         userRepository.findById(user.getId()).setFriendsRequest(user.getFriendsRequest());
         return userRepository.findById(user.getId());
     }*/
+
+
+    @CrossOrigin
+    @PutMapping
+    public User updateUserInformation(@RequestBody User user) {
+        userRepository.findById(user.getId()).setFirstName(user.getFirstName());
+        userRepository.findById(user.getId()).setLastName(user.getLastName());
+        userRepository.findById(user.getId()).setEmail(user.getEmail());
+        userRepository.findById(user.getId()).setPassword(user.getPassword());
+        userRepository.findById(user.getId()).setPhoneNumber(user.getPhoneNumber());
+        return userRepository.findById(user.getId());
+    }
+
+    @CrossOrigin
+    @PostMapping("create-friend")
+    public User addFriend(@RequestBody User user) {
+        userRepository.findById(user.getId()).setFriends(user.getFriends());
+        return userRepository.findById(user.getId());
+    }
+
+    @CrossOrigin
+    @DeleteMapping("delete-friend")
+    public User deleteFriend(@RequestBody User user) {
+        userRepository.findById(user.getId()).setFriendsRequest(user.getFriendsRequest());
+        return userRepository.findById(user.getId());
+    }
 }
