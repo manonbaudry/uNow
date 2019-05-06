@@ -64,7 +64,6 @@ public class UserControllerSpringBootTests {
         System.out.println(response1.getBody().length);
         HttpEntity<User> userHttpEntity = new HttpEntity<>(new User("Jackie", "Kennedy", "man.baudry@gmail.com", "azerty", "Saint Amand", "0631440224", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         template.postForObject(baseURL.toString(), userHttpEntity, User.class);
-
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
         assertEquals(4, response.getBody().length);
     }

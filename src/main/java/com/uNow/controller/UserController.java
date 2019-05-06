@@ -3,6 +3,7 @@ package com.uNow.controller;
 import com.uNow.entities.User;
 import com.uNow.exceptions.AlreadyExistEmailException;
 import com.uNow.exceptions.UserNotFoundException;
+import com.uNow.exceptions.WrongUserRequestException;
 import com.uNow.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,8 +26,10 @@ public class UserController {
 
     @CrossOrigin
     @GetMapping("/{id}")
-    public User findById(@PathVariable("id") long id) {
-        //ici on renvoit l'exception
+    public User findById(@PathVariable("id") long id) throws UserNotFoundException {
+        if (userRepository.findById(id) == null) {
+            throw new UserNotFoundException();
+        }
         return userRepository.findById(id);
     }
 
@@ -45,12 +48,6 @@ public class UserController {
     }
 
 /*
-    @CrossOrigin
-    @PutMapping
-    public User updateUserFriend(@RequestBody User user) {
-        userRepository.findById(user.getId()).setFriends(user.getFriends());
-        return userRepository.findById(user.getId());
-    }
 
     @CrossOrigin
     @PutMapping
@@ -72,16 +69,26 @@ public class UserController {
     }
 
     @CrossOrigin
-    @PostMapping("create-friend")
+    @PostMapping("/create-friend")
     public User addFriend(@RequestBody User user) {
         userRepository.findById(user.getId()).setFriends(user.getFriends());
         return userRepository.findById(user.getId());
     }
 
     @CrossOrigin
-    @DeleteMapping("delete-friend")
+    @DeleteMapping("/delete-friend")
     public User deleteFriend(@RequestBody User user) {
         userRepository.findById(user.getId()).setFriendsRequest(user.getFriendsRequest());
+        return userRepository.findById(user.getId());
+    }
+
+    @CrossOrigin
+    @PostMapping("/{id}/create-activity")
+    public User addActivity(@PathVariable("id") Long id, @RequestBody User user) throws WrongUserRequestException {
+        if (id != user.getId()) {
+            throw new WrongUserRequestException("This request doesn't concern this user");
+        }
+        userRepository.findById(user.getId()).setActivities(user.getActivities());
         return userRepository.findById(user.getId());
     }
 }
