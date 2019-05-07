@@ -15,18 +15,18 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = UNowApplication.class,
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = UNowApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ActivityControllerTest {
 
     @LocalServerPort
@@ -47,7 +47,6 @@ public class ActivityControllerTest {
 
     @Test
     public void whenCreateActivity_ThenReturnNewActivity(){
-
         HttpEntity<Activity> activityHttpEntity = new HttpEntity<>(createActivity());
 
         ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString(), Activity[].class);
@@ -57,18 +56,17 @@ public class ActivityControllerTest {
 
         response = template.getForEntity(baseURL.toString(), Activity[].class);
         assertEquals(1, response.getBody().length);
-
     }
 
     @Test
     public void whenFindAllByUser_ThenReturnListActivity(){
-        ResponseEntity<String> r = template.getForEntity(baseURL.toString() + "/1" ,String.class);
-        assertEquals(HttpStatus.OK, r.getStatusCode());
+        ResponseEntity<String> responseEntity = template.getForEntity(baseURL.toString() + "/1" ,String.class);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
         HttpEntity<Activity> activityHttpEntity = new HttpEntity<>(createActivity());
         template.postForObject(baseURL.toString(), activityHttpEntity, Activity.class);
 
-        ResponseEntity<Object[]> response = template.getForEntity(baseURL.toString() + "/1", Object[].class);
+        ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString() + "/1", Activity[].class);
         assertEquals(1, response.getBody().length);
     }
 

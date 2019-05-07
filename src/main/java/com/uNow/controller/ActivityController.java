@@ -9,7 +9,6 @@ import com.uNow.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -18,12 +17,23 @@ public class ActivityController {
 
     @Autowired
     private ActivityRepository activityRepository;
+
+
     @Autowired
     private UserRepository userRepository;
 
+    @PostMapping
+    public Activity createActivity(@RequestBody Activity activity){
+        return activityRepository.save(activity);
+    }
+    @GetMapping
+    public List<Activity> getAll(){
+        return  activityRepository.findAll();
+    }
+
     @GetMapping("/{userId}")
     public List<Activity> findAllByUser(@PathVariable("userId") Long userId )  throws UserNotFoundException {
-        User u = userRepository.getOne(userId);
+        User u = userRepository.findById(userId).get();
         if(activityRepository.findByUser(u) == null)
             throw new UserNotFoundException();
         return activityRepository.findByUser(u);
@@ -34,10 +44,4 @@ public class ActivityController {
     public void deleteActivity(@PathVariable("activityId") long activityId) {
         activityRepository.deleteById(activityId);
     }
-
-    @PostMapping
-    public Activity createActivity(@RequestBody Activity activity){
-        return activityRepository.save(activity);
-    }
-
 }
