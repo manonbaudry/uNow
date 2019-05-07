@@ -2,6 +2,7 @@ package com.uNow.controller;
 
 import com.uNow.entities.User;
 import com.uNow.repositories.ActivityRepository;
+import com.uNow.repositories.FriendsRepository;
 import com.uNow.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,25 +27,19 @@ public class UserControllerWebMvcTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockBean   
     private ActivityRepository activityRepository;
 
     @MockBean
     private UserRepository userRepository;
 
-    private User u;
-
-    @Before
-    public void init() {
-        u = new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com", "azerty", "7 rue du Levrier", "0000000000");
-
-    }
-
+    @MockBean
+    private FriendsRepository friendsRepository;
 
 
     @Test
     public void whenFindUserByIdWhoDoesntExist_ThenReturn404() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/3"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/12"))
                 .andExpect(status().isNotFound());
     }
 }

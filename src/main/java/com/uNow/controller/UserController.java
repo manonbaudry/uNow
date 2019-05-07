@@ -46,16 +46,6 @@ public class UserController {
         throw new AlreadyExistEmailException("The given email is already in use");
     }
 
-/*
-
-    @CrossOrigin
-    @PutMapping
-    public User updateUserFriendRequest(@RequestBody User user) {
-        userRepository.findById(user.getId()).setFriendsRequest(user.getFriendsRequest());
-        return userRepository.findById(user.getId());
-    }*/
-
-
     @CrossOrigin
     @PutMapping
     public User updateUserInformation(@RequestBody User user) {
@@ -86,26 +76,4 @@ public class UserController {
          userRepository.save(tmp);
         return userRepository.findById(user.getId());
     }
-    /*
-
-    @CrossOrigin
-    @PostMapping("/create-friend")
-    public User addFriend(@RequestBody User user) {
-        userRepository.findById(user.getId()).setFriends(user.getFriends());
-        return userRepository.findById(user.getId());
-    }
-
-    @CrossOrigin
-    @DeleteMapping("/delete-friend")
-    public User deleteFriend(@RequestBody User user) {
-        userRepository.findById(user.getId()).setFriendsRequest(user.getFriendsRequest());
-        return userRepository.findById(user.getId());
-    }*/
-/*
-    @CrossOrigin
-    @PostMapping("/create-activity")
-    public User addActivity(@RequestBody User user) {
-        userRepository.findById(user.getId()).setActivities(user.getActivities());
-        return userRepository.findById(user.getId());
-    }*/
 }
