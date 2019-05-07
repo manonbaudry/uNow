@@ -2,6 +2,7 @@ package com.uNow.controller;
 
 import com.uNow.UNowApplication;
 import com.uNow.entities.User;
+import org.apache.tomcat.util.log.SystemLogHandler;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.MalformedURLException;
@@ -22,6 +24,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = UNowApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class UserControllerSpringBootTests {
 
     @LocalServerPort
@@ -41,7 +44,7 @@ public class UserControllerSpringBootTests {
     public void whenCreateUser_ThenReturnNewUser() {
 
 
-       HttpEntity<User> userHttpEntity = new HttpEntity<>(new User("Jonathan", "Wadin", "lunaat@gmail.com", "azerty", "7 rue du Levrier", "0000000000", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+       HttpEntity<User> userHttpEntity = new HttpEntity<>(createUser("jonathan.wadin@gmail.com"));
 
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
         assertEquals(3, response.getBody().length);
@@ -60,13 +63,31 @@ public class UserControllerSpringBootTests {
 
     @Test
     public void whenCreateUserWithAlreadyExistEmail_ThenThrowException() {
-        ResponseEntity<User[]> response1 = template.getForEntity(baseURL.toString(), User[].class);
-        System.out.println(response1.getBody().length);
-        HttpEntity<User> userHttpEntity = new HttpEntity<>(new User("Jackie", "Kennedy", "man.baudry@gmail.com", "azerty", "Saint Amand", "0631440224", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        HttpEntity<User> userHttpEntity = new HttpEntity<>(createUser("man.baudry@gmail.com"));
         template.postForObject(baseURL.toString(), userHttpEntity, User.class);
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
-        assertEquals(4, response.getBody().length);
+        assertEquals(3, response.getBody().length);
     }
+
+    @Test
+    public void whenUpdateUserInformation_ThenUserIsUpdated(){
+        /*ResponseEntity <User> response = template.getForEntity(baseURL.toString() + "/1", User.class);
+        User userToUpdate = response.getBody();
+        userToUpdate.setEmail("test@toto.fr");
+        System.out.println("ID UserToUpdate :" + userToUpdate.getId());
+
+        template.put(baseURL.toString(), userToUpdate);
+
+        response = template.getForEntity(baseURL.toString() + "/1", User.class);
+        System.out.println(response.getBody().toString());
+        assertEquals("test@toto.fr", response.getBody().getEmail());*/
+
+    }
+
+    public User createUser(String email){
+        return new User("Jackie", "Kennedy", email, "azerty", "Saint Amand", "0631440224", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    }
+
 
 
 }

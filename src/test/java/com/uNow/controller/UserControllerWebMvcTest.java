@@ -15,6 +15,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -38,26 +40,8 @@ public class UserControllerWebMvcTest {
         u = new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com", "azerty", "7 rue du Levrier", "0000000000", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         //userRepository.save(new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com", "azerty", "7 rue du Levrier", "0000000000", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
     }
-    @Test
-    public void whenUpdateUserInformation_ThenUserIsUpdated() throws Exception {
-      /*  given(userRepository.findById(anyLong())).willReturn(u);
-        //u.setEmail("man.baudry@gmail.com");
-        ArrayList<User> tmp = new ArrayList<>();
-        tmp.add(u);
-        u.setFriends(tmp);
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/create-friend", u))
-            .andExpect(status().isOk());
-            //.andExpect(jsonPath("email").value("man.baudry@gmail.com"));
 
 
-    /*
-    Test Get request :
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/1"))
-                .andExpect(status().isOk())
-               .andExpect(jsonPath("firstName").value("Jonathan"));
-    */
-    }
 
     @Test
     public void whenFindUserByIdWhoDoesntExist_ThenReturn404() throws Exception {

@@ -3,7 +3,6 @@ package com.uNow.controller;
 import com.uNow.entities.User;
 import com.uNow.exceptions.AlreadyExistEmailException;
 import com.uNow.exceptions.UserNotFoundException;
-import com.uNow.exceptions.WrongUserRequestException;
 import com.uNow.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -83,11 +82,8 @@ public class UserController {
     }
 
     @CrossOrigin
-    @PostMapping("/{id}/create-activity")
-    public User addActivity(@PathVariable("id") Long id, @RequestBody User user) throws WrongUserRequestException {
-        if (id != user.getId()) {
-            throw new WrongUserRequestException("This request doesn't concern this user");
-        }
+    @PostMapping("/create-activity")
+    public User addActivity(@RequestBody User user) {
         userRepository.findById(user.getId()).setActivities(user.getActivities());
         return userRepository.findById(user.getId());
     }
