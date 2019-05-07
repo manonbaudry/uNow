@@ -59,11 +59,31 @@ public class UserController {
     @CrossOrigin
     @PutMapping
     public User updateUserInformation(@RequestBody User user) {
-        userRepository.findById(user.getId()).setFirstName(user.getFirstName());
-        userRepository.findById(user.getId()).setLastName(user.getLastName());
-        userRepository.findById(user.getId()).setEmail(user.getEmail());
-        userRepository.findById(user.getId()).setPassword(user.getPassword());
-        userRepository.findById(user.getId()).setPhoneNumber(user.getPhoneNumber());
+        User tmp = userRepository.findById(user.getId());
+        if(user.getFirstName()!= null) {
+            tmp.setFirstName(user.getFirstName());
+        }
+        if(user.getLastName() != null) {
+            tmp.setLastName(user.getLastName());
+            userRepository.findById(user.getId()).setLastName(user.getLastName());
+        }
+        if(user.getEmail() != null) {
+            tmp.setEmail(user.getEmail());
+            userRepository.findById(user.getId()).setEmail(user.getEmail());
+        }
+        if(user.getPassword() != null) {
+            tmp.setPassword(user.getPassword());
+            userRepository.findById(user.getId()).setPassword(user.getPassword());
+        }
+        if(user.getPhoneNumber() != null) {
+            tmp.setPhoneNumber(user.getPhoneNumber());
+            userRepository.findById(user.getId()).setPhoneNumber(user.getPhoneNumber());
+        }
+        if(user.getLocation() != null) {
+            tmp.setLocation(user.getLocation());
+            userRepository.findById(user.getId()).setLocation(user.getLocation());
+        }
+         userRepository.save(tmp);
         return userRepository.findById(user.getId());
     }
     /*

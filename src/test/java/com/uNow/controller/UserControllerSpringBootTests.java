@@ -69,16 +69,16 @@ public class UserControllerSpringBootTests {
 
     @Test
     public void whenUpdateUserInformation_ThenUserIsUpdated(){
-        /*ResponseEntity <User> response = template.getForEntity(baseURL.toString() + "/1", User.class);
+        ResponseEntity <User> response = template.getForEntity(baseURL.toString() + "/1", User.class);
         User userToUpdate = response.getBody();
-        userToUpdate.setEmail("test@toto.fr");
-        System.out.println("ID UserToUpdate :" + userToUpdate.getId());
+        userToUpdate.setFirstName("Jackie");
+        userToUpdate.setLastName("Kennedy");
 
         template.put(baseURL.toString(), userToUpdate);
 
         response = template.getForEntity(baseURL.toString() + "/1", User.class);
-        System.out.println(response.getBody().toString());
-        assertEquals("test@toto.fr", response.getBody().getEmail());*/
+        assertEquals("Jackie", response.getBody().getFirstName());
+        assertEquals("Kennedy", response.getBody().getLastName());
 
     }
 

@@ -6,35 +6,36 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Data
 @Entity
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue
     private long id;
 
-    @NonNull
     private String firstName;
 
-    @NonNull
     private String lastName;
 
-    @NonNull
     private String email;
 
-    @NonNull
     private String password;
 
-    @NonNull
     private String location;
 
-    @NonNull
     private String phoneNumber;
 
 
+    public User(String firstName, String lastName, String email, String password, String location, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.location = location;
+        this.phoneNumber = phoneNumber;
+    }
 }

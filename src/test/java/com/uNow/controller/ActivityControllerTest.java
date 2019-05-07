@@ -72,19 +72,19 @@ public class ActivityControllerTest {
 
     @Test
     public void whenDeleteActivity_ThenActivityIsDeleted(){
-      /*  HttpEntity<Activity> activityHttpEntity = new HttpEntity<>(createActivity());
-        template.postForObject(baseURL.toString(), activityHttpEntity, Activity.class);
+      HttpEntity<Activity> activityHttpEntity = new HttpEntity<>(createActivity());
+      template.postForObject(baseURL.toString(), activityHttpEntity, Activity.class);
 
-        ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString(), Activity[].class);
-        assertEquals(1, response.getBody().length);
+      ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString(), Activity[].class);
 
+      assertEquals(1, response.getBody().length);
 
+      System.out.println("IDDDDDDDD : " + activityHttpEntity.getBody().toString());
 
-        //template.delete(baseURL.toString() + "/0");
-        template.delete(baseURL.toString()+ "/0", activityHttpEntity, Activity.class);
+        template.delete(baseURL.toString() + "/0");
 
         response = template.getForEntity(baseURL.toString(), Activity[].class);
-        assertEquals(0, response.getBody().length);*/
+        assertEquals(0, response.getBody().length);
 
     }
 
