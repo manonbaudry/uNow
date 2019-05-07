@@ -36,17 +36,5 @@ public class User {
     @NonNull
     private String phoneNumber;
 
-    @NonNull
-    @OneToMany
-    private List<User> friends;
 
-    @NonNull
-    @OneToMany
-    private List<Activity> activities;
-
-    //Créer un nouvel objet
-
-    @NonNull
-    @OneToMany
-    private List<User> friendsRequest;
 }

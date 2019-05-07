@@ -2,7 +2,6 @@ package com.uNow.controller;
 
 import com.uNow.UNowApplication;
 import com.uNow.entities.User;
-import org.apache.tomcat.util.log.SystemLogHandler;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -85,7 +83,7 @@ public class UserControllerSpringBootTests {
     }
 
     public User createUser(String email){
-        return new User("Jackie", "Kennedy", email, "azerty", "Saint Amand", "0631440224", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        return new User("Jackie", "Kennedy", email, "azerty", "Saint Amand", "0631440224");
     }
 
 

@@ -45,8 +45,8 @@ public class ActivityControllerTest {
 
     @Test
     public void whenCreateActivity_ThenReturnNewActivity(){
-        User user = userRepository.findById(new Long(1)).get();
-        HttpEntity<Activity> activityHttpEntity = new HttpEntity<>(new Activity( user  , ActivityType.WORK, new Date()));
+
+        HttpEntity<Activity> activityHttpEntity = new HttpEntity<>(createActivity());
 
         ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString(), Activity[].class);
         assertEquals(0, response.getBody().length);
@@ -56,6 +56,11 @@ public class ActivityControllerTest {
         response = template.getForEntity(baseURL.toString(), Activity[].class);
         assertEquals(1, response.getBody().length);
 
+    }
+
+    private Activity createActivity() {
+        User user = userRepository.findById(1);
+        return new Activity( user  , ActivityType.WORK, new Date());
     }
 
 

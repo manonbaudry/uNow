@@ -66,6 +66,7 @@ public class UserController {
         userRepository.findById(user.getId()).setPhoneNumber(user.getPhoneNumber());
         return userRepository.findById(user.getId());
     }
+    /*
 
     @CrossOrigin
     @PostMapping("/create-friend")
@@ -79,12 +80,12 @@ public class UserController {
     public User deleteFriend(@RequestBody User user) {
         userRepository.findById(user.getId()).setFriendsRequest(user.getFriendsRequest());
         return userRepository.findById(user.getId());
-    }
-
+    }*/
+/*
     @CrossOrigin
     @PostMapping("/create-activity")
     public User addActivity(@RequestBody User user) {
         userRepository.findById(user.getId()).setActivities(user.getActivities());
         return userRepository.findById(user.getId());
-    }
+    }*/
 }
