@@ -13,12 +13,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -56,6 +58,18 @@ public class ActivityControllerTest {
         response = template.getForEntity(baseURL.toString(), Activity[].class);
         assertEquals(1, response.getBody().length);
 
+    }
+
+    @Test
+    public void whenFindAllByUser_ThenReturnListActivity(){
+        ResponseEntity<String> r = template.getForEntity(baseURL.toString() + "/1" ,String.class);
+        assertEquals(HttpStatus.OK, r.getStatusCode());
+
+        HttpEntity<Activity> activityHttpEntity = new HttpEntity<>(createActivity());
+        template.postForObject(baseURL.toString(), activityHttpEntity, Activity.class);
+
+        ResponseEntity<Object[]> response = template.getForEntity(baseURL.toString() + "/1", Object[].class);
+        assertEquals(1, response.getBody().length);
     }
 
     private Activity createActivity() {
