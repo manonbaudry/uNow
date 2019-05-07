@@ -26,6 +26,7 @@ public class ActivityController {
     public Activity createActivity(@RequestBody Activity activity){
         return activityRepository.save(activity);
     }
+
     @GetMapping
     public List<Activity> getAll(){
         return  activityRepository.findAll();
@@ -42,6 +43,7 @@ public class ActivityController {
     @CrossOrigin
     @DeleteMapping("/{activityId}")
     public void deleteActivity(@PathVariable("activityId") long activityId) {
-        activityRepository.deleteById(activityId);
+        activityRepository.delete(activityRepository.findById(activityId).get());
+        //activityRepository.deleteById(activityId);
     }
 }

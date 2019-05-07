@@ -26,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = UNowApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ActivityControllerTest {
 
     @LocalServerPort
@@ -68,6 +68,24 @@ public class ActivityControllerTest {
 
         ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString() + "/1", Activity[].class);
         assertEquals(1, response.getBody().length);
+    }
+
+    @Test
+    public void whenDeleteActivity_ThenActivityIsDeleted(){
+      /*  HttpEntity<Activity> activityHttpEntity = new HttpEntity<>(createActivity());
+        template.postForObject(baseURL.toString(), activityHttpEntity, Activity.class);
+
+        ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString(), Activity[].class);
+        assertEquals(1, response.getBody().length);
+
+
+
+        //template.delete(baseURL.toString() + "/0");
+        template.delete(baseURL.toString()+ "/0", activityHttpEntity, Activity.class);
+
+        response = template.getForEntity(baseURL.toString(), Activity[].class);
+        assertEquals(0, response.getBody().length);*/
+
     }
 
     private Activity createActivity() {
