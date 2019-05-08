@@ -1,11 +1,11 @@
 package com.uNow.entities;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 
 @Data
@@ -39,7 +39,20 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public User updateWith(User userUpdate){
-        return null;
+    public User updateWith(User userUpdated) {
+        if (userUpdated.getFirstName() != null)
+            this.firstName = userUpdated.getFirstName();
+        if (userUpdated.getLastName() != null)
+            this.lastName = userUpdated.getLastName();
+        if (userUpdated.getEmail() != null)
+            this.email = userUpdated.getEmail();
+        if (userUpdated.getPassword() != null)
+            this.password = userUpdated.getPassword();
+        if (userUpdated.getLocation() != null)
+            this.location = userUpdated.getLocation();
+        if (userUpdated.getPhoneNumber() != null)
+            this.phoneNumber = userUpdated.getPhoneNumber();
+
+        return this;
     }
 }

@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = UNowApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class UserControllerSpringBootTests {
+public class UserControllerTest {
 
     @LocalServerPort
     private int port;
@@ -80,6 +80,12 @@ public class UserControllerSpringBootTests {
         assertEquals("Jackie", response.getBody().getFirstName());
         assertEquals("Kennedy", response.getBody().getLastName());
 
+    }
+
+    @Test
+    public void whenFindUserByIdWhoDoesntExist_ThenReturn404() {
+        ResponseEntity<String> response = template.getForEntity(baseURL.toString() + "/19", String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     public User createUser(String email){

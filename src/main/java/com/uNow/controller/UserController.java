@@ -48,32 +48,10 @@ public class UserController {
 
     @CrossOrigin
     @PutMapping
-    public User updateUserInformation(@RequestBody User user) {
-        User userToUpdate = userRepository.findById(user.getId());
-        if(user.getFirstName()!= null) {
-            userToUpdate.setFirstName(user.getFirstName());
-        }
-        if(user.getLastName() != null) {
-            userToUpdate.setLastName(user.getLastName());
-            userRepository.findById(user.getId()).setLastName(user.getLastName());
-        }
-        if(user.getEmail() != null) {
-            userToUpdate.setEmail(user.getEmail());
-            userRepository.findById(user.getId()).setEmail(user.getEmail());
-        }
-        if(user.getPassword() != null) {
-            userToUpdate.setPassword(user.getPassword());
-            userRepository.findById(user.getId()).setPassword(user.getPassword());
-        }
-        if(user.getPhoneNumber() != null) {
-            userToUpdate.setPhoneNumber(user.getPhoneNumber());
-            userRepository.findById(user.getId()).setPhoneNumber(user.getPhoneNumber());
-        }
-        if(user.getLocation() != null) {
-            userToUpdate.setLocation(user.getLocation());
-            userRepository.findById(user.getId()).setLocation(user.getLocation());
-        }
-         userRepository.save(userToUpdate);
-        return userRepository.findById(user.getId());
+    public User updateUserInformation(@RequestBody User userUpdated) {
+        User userToUpdate = userRepository.findById(userUpdated.getId());
+        userToUpdate.updateWith(userUpdated);
+        userRepository.save(userToUpdate);
+        return userRepository.findById(userUpdated.getId());
     }
 }
