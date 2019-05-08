@@ -34,10 +34,10 @@ public class ActivityController {
 
     @GetMapping("/{userId}")
     public List<Activity> findAllByUser(@PathVariable("userId") Long userId )  throws UserNotFoundException {
-        User u = userRepository.findById(userId).get();
-        if(activityRepository.findByUser(u) == null)
+        User user = userRepository.findById(userId).get();
+        if(activityRepository.findByUser(user) == null)
             throw new UserNotFoundException();
-        return activityRepository.findByUser(u);
+        return activityRepository.findByUser(user);
     }
 
     @CrossOrigin

@@ -29,7 +29,7 @@ public class UNowApplication {
             userRepository.save(new User("Arnaud", "Bascop", "nonoDu59@gmail.com", "azerty", "52 rua de Heroismo", "0605436459"));
             userRepository.save(new User("Manon", "Baudry", "man.baudry@gmail.com", "azerty", "52 rua de Heroismo", "0679065306"));
 
-            activityRepository.save(new Activity(userRepository.findById((long)1), ActivityType.WORK, new Date()));
+            activityRepository.save(new Activity(userRepository.findById(1L), ActivityType.WORK, new Date()));
         };
     }
 

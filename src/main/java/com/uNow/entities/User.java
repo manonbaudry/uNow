@@ -38,4 +38,8 @@ public class User {
         this.location = location;
         this.phoneNumber = phoneNumber;
     }
+
+    public User updateWith(User userUpdate){
+        return null;
+    }
 }

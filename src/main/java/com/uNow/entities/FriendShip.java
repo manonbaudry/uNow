@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @RequiredArgsConstructor
-public class Friends {
+public class FriendShip {
 
     @Id
     @GeneratedValue
@@ -18,10 +18,10 @@ public class Friends {
 
     @NonNull
     @ManyToOne
-    private User user1;
+    private User userFrom;
 
     @NonNull
     @ManyToOne
-    private User user2;
+    private User userTo;
 
 }
