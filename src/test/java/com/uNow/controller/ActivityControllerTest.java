@@ -54,10 +54,8 @@ public class ActivityControllerTest {
 
         template.postForObject(baseURL.toString(), activityHttpEntity, Activity.class);
 
-
         response = template.getForEntity(baseURL.toString(), Activity[].class);
         assertEquals(2, response.getBody().length);
-
     }
 
     @Test
@@ -74,21 +72,16 @@ public class ActivityControllerTest {
 
     @Test
     public void whenDeleteActivity_ThenActivityIsDeleted(){
-    /*
       HttpEntity<Activity> activityHttpEntity = new HttpEntity<>(createActivity());
       template.postForObject(baseURL.toString(), activityHttpEntity, Activity.class);
 
       ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString(), Activity[].class);
       assertEquals(2, response.getBody().length);
 
-      System.out.println("\n\n\nhttEntity : " + activityHttpEntity.getBody().toString());
-
-        template.delete(baseURL.toString() + "/" + activityHttpEntity.getBody().getId());
+        template.delete(baseURL.toString() + "/4");
 
         response = template.getForEntity(baseURL.toString(), Activity[].class);
         assertEquals(1, response.getBody().length);
-        */
-
     }
 
     private Activity createActivity() {

@@ -43,6 +43,7 @@ public class ActivityController {
     @CrossOrigin
     @DeleteMapping("/{activityId}")
     public void deleteActivity(@PathVariable("activityId") long activityId) {
-       activityRepository.delete(activityRepository.findById(activityId).get());
+        Activity activityToDelete = activityRepository.findById(activityId).get();
+        activityRepository.delete(activityToDelete);
     }
 }
