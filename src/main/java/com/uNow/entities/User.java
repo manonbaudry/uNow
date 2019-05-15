@@ -29,6 +29,8 @@ public class User {
 
     private String phoneNumber;
 
+    private String refreshToken;
+
 
     public User(String firstName, String lastName, String email, String password, String location, String phoneNumber) {
         this.firstName = firstName;
@@ -37,6 +39,7 @@ public class User {
         this.password = password;
         this.location = location;
         this.phoneNumber = phoneNumber;
+        this.refreshToken = null;
     }
 
     public User updateWith(User userUpdated) {

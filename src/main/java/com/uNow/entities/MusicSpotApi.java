@@ -21,4 +21,6 @@ public class MusicSpotApi {
 
 
     private String state;
+
+    private String refreshToken;
 }
