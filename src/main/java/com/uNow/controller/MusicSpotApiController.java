@@ -33,7 +33,7 @@ public class MusicSpotApiController {
         if (state != null) {
             HttpPost post = new HttpPost("https://accounts.spotify.com/api/token?grant_type=authorization_code&code=" + code + "&redirect_uri=https%3A%2F%2Funow-api.herokuapp.com/%2Fcallback/%2FrefreshToken");
             post.setHeader("Content-Type", "application/x-www-form-urlencoded");
-            post.setHeader("Authorization", "Basic" + new Base64().encode("d3dafa68bb434601b56cb999de50ce59") + ":" + new Base64().encode("57af408d7b3f43cc9fc3728a9101cb89"));
+            post.setHeader("Authorization", "Basic" + new Base64().encode("d3dafa68bb434601b56cb999de50ce59".getBytes()) + ":" + new Base64().encode("57af408d7b3f43cc9fc3728a9101cb89".getBytes()));
             CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
             closeableHttpClient.execute(post);
         }
