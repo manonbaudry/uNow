@@ -1,29 +1,28 @@
 package com.uNow.controller;
 
 
-import com.uNow.repositories.SpotifyApiRepository;
+import com.uNow.repositories.MusicSpotApiRepository;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
 
 @RestController
 @RequestMapping("/callback")
-public class SpotifyApiController {
+public class MusicSpotApiController {
 
 
     @Autowired
-    private SpotifyApiRepository spotifyApiRepository;
+    private MusicSpotApiRepository musicSpotApiRepository;
 
-    @RequestMapping
-    @GetMapping
-    public void getAuth(@RequestParam("code") String code, @RequestParam("state") String state) {
 
-    }
 
     @RequestMapping
     @PostMapping
