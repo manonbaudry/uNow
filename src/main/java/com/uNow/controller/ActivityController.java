@@ -22,16 +22,19 @@ public class ActivityController {
     @Autowired
     private UserRepository userRepository;
 
+    @CrossOrigin
     @PostMapping
     public Activity createActivity(@RequestBody Activity activity){
         return activityRepository.save(activity);
     }
 
+    @CrossOrigin
     @GetMapping
     public List<Activity> getAll(){
         return  activityRepository.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("/{userId}")
     public List<Activity> findAllByUser(@PathVariable("userId") Long userId )  throws UserNotFoundException {
         User user = userRepository.findById(userId).get();
