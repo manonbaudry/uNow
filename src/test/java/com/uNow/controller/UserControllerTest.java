@@ -79,7 +79,6 @@ public class UserControllerTest {
         response = template.getForEntity(baseURL.toString() + "/1", User.class);
         assertEquals("Jackie", response.getBody().getFirstName());
         assertEquals("Kennedy", response.getBody().getLastName());
-
     }
 
     @Test
@@ -91,7 +90,4 @@ public class UserControllerTest {
     public User createUser(String email){
         return new User("Jackie", "Kennedy", email, "azerty", "Saint Amand", "0631440224");
     }
-
-
-
 }

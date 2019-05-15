@@ -10,7 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -30,6 +29,8 @@ public class UNowApplication {
             userRepository.save(new User("Manon", "Baudry", "man.baudry@gmail.com", "azerty", "52 rua de Heroismo", "0679065306"));
 
             activityRepository.save(new Activity(userRepository.findById(1L), ActivityType.WORK, new Date()));
+            activityRepository.save(new Activity(userRepository.findById(1L), ActivityType.SPORT, new Date()));
+
         };
     }
 
