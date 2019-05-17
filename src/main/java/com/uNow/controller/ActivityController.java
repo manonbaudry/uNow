@@ -7,6 +7,7 @@ import com.uNow.exceptions.UserNotFoundException;
 import com.uNow.repositories.ActivityRepository;
 import com.uNow.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,5 +49,10 @@ public class ActivityController {
     public void deleteActivity(@PathVariable("activityId") long activityId) {
         Activity activityToDelete = activityRepository.findById(activityId).get();
         activityRepository.delete(activityToDelete);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public void userNotFoundHandler(UserNotFoundException e) {
     }
 }

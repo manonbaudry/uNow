@@ -6,6 +6,7 @@ import com.uNow.exceptions.UserNotFoundException;
 import com.uNow.repositories.FriendShipRepository;
 import com.uNow.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class FriendShipController {
             userExist = true;
             userFromFriendship = friendShipRepository.findByUserFrom(userRepository.findById(id).get());
             for (FriendShip friendship : userFromFriendship) {
-                if (friendship.getUserFrom().getId() != id) {
+                if (friendship.getUserFrom().getId() != id && !result.contains(friendship.getUserFrom())) {
                     result.add(friendship.getUserFrom());
                 } else {
                     result.add(friendship.getUserTo());
@@ -57,7 +58,7 @@ public class FriendShipController {
             userExist = true;
             userToFriendship = friendShipRepository.findByUserTo(userRepository.findById(id).get());
             for (FriendShip friendship : userToFriendship) {
-                if (friendship.getUserFrom().getId() != id) {
+                if (friendship.getUserFrom().getId() != id && !result.contains(friendship.getUserTo())) {
                     result.add(friendship.getUserFrom());
                 } else {
                     result.add(friendship.getUserTo());
@@ -69,6 +70,11 @@ public class FriendShipController {
             throw new UserNotFoundException();
 
         return result;
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public void userNotFoundHandler(UserNotFoundException e) {
     }
 
 }
