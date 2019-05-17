@@ -50,12 +50,12 @@ public class ActivityControllerTest {
         HttpEntity<Activity> activityHttpEntity = new HttpEntity<>(createActivity());
 
         ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString(), Activity[].class);
-        assertEquals(2, response.getBody().length);
+        assertEquals(3, response.getBody().length);
 
         template.postForObject(baseURL.toString(), activityHttpEntity, Activity.class);
 
         response = template.getForEntity(baseURL.toString(), Activity[].class);
-        assertEquals(3, response.getBody().length);
+        assertEquals(4, response.getBody().length);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class ActivityControllerTest {
         template.postForObject(baseURL.toString(), activityHttpEntity, Activity.class);
 
         ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString() + "/1", Activity[].class);
-        assertEquals(3, response.getBody().length);
+        assertEquals(2, response.getBody().length);
     }
 
     @Test
@@ -76,18 +76,17 @@ public class ActivityControllerTest {
       template.postForObject(baseURL.toString(), activityHttpEntity, Activity.class);
 
       ResponseEntity<Activity[]> response = template.getForEntity(baseURL.toString(), Activity[].class);
-        assertEquals(3, response.getBody().length);
+        assertEquals(4, response.getBody().length);
 
-        template.delete(baseURL.toString() + "/4");
+        template.delete(baseURL.toString() + "/5");
 
         response = template.getForEntity(baseURL.toString(), Activity[].class);
-        assertEquals(2, response.getBody().length);
+        assertEquals(3, response.getBody().length);
     }
 
     private Activity createActivity() {
         User user = userRepository.findById(1);
         return new Activity( user  , ActivityType.WORK, new Date());
     }
-
 
 }

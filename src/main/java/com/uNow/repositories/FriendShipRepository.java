@@ -13,4 +13,5 @@ public interface FriendShipRepository extends JpaRepository<FriendShip, Long> {
 
     List<FriendShip> findByUserTo(User userTo);
 
+
 }

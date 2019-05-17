@@ -45,12 +45,12 @@ public class UserControllerTest {
        HttpEntity<User> userHttpEntity = new HttpEntity<>(createUser("jonathan.wadin@gmail.com"));
 
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
-        assertEquals(3, response.getBody().length);
+        assertEquals(4, response.getBody().length);
 
         template.postForObject(baseURL.toString(), userHttpEntity, User.class);
 
         response = template.getForEntity(baseURL.toString(), User[].class);
-        assertEquals(4, response.getBody().length);
+        assertEquals(5, response.getBody().length);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class UserControllerTest {
         HttpEntity<User> userHttpEntity = new HttpEntity<>(createUser("man.baudry@gmail.com"));
         template.postForObject(baseURL.toString(), userHttpEntity, User.class);
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);
-        assertEquals(3, response.getBody().length);
+        assertEquals(4, response.getBody().length);
     }
 
     @Test

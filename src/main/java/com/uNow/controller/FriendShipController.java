@@ -1,12 +1,14 @@
 package com.uNow.controller;
 
 import com.uNow.entities.FriendShip;
+import com.uNow.entities.User;
 import com.uNow.exceptions.UserNotFoundException;
 import com.uNow.repositories.FriendShipRepository;
 import com.uNow.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,14 +35,40 @@ public class FriendShipController {
 
     @CrossOrigin
     @GetMapping("/{userId}")
-    public List<FriendShip> getAllFriendsByUser(@PathVariable("userId") Long id) throws UserNotFoundException {
-        if (friendShipRepository.findByUserFrom(userRepository.findById(id).get()) != null)
-            return friendShipRepository.findByUserFrom(userRepository.findById(id).get());
-        else if (friendShipRepository.findByUserTo(userRepository.findById(id).get()) != null)
-            return friendShipRepository.findByUserTo(userRepository.findById(id).get());
-        else throw new UserNotFoundException();
+    public List<User> getAllFriendsByUser(@PathVariable("userId") Long id) throws UserNotFoundException {
+        List<FriendShip> userFromFriendship;
+        List<FriendShip> userToFriendship;
+        List<User> result = new ArrayList<>();
+        boolean userExist = false;
+
+        if (friendShipRepository.findByUserFrom(userRepository.findById(id).get()) != null) {
+            userExist = true;
+            userFromFriendship = friendShipRepository.findByUserFrom(userRepository.findById(id).get());
+            for (FriendShip friendship : userFromFriendship) {
+                if (friendship.getUserFrom().getId() != id) {
+                    result.add(friendship.getUserFrom());
+                } else {
+                    result.add(friendship.getUserTo());
+                }
+            }
+        }
+
+        if (friendShipRepository.findByUserTo(userRepository.findById(id).get()) != null) {
+            userExist = true;
+            userToFriendship = friendShipRepository.findByUserTo(userRepository.findById(id).get());
+            for (FriendShip friendship : userToFriendship) {
+                if (friendship.getUserFrom().getId() != id) {
+                    result.add(friendship.getUserFrom());
+                } else {
+                    result.add(friendship.getUserTo());
+                }
+            }
+        }
+
+        if (!userExist)
+            throw new UserNotFoundException();
+
+        return result;
     }
-
-
 
 }

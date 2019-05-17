@@ -47,18 +47,27 @@ public class FriendShipControllerTest {
 
     @Test
     public void whenCreateFriendShip_ThenReturnNewFriendShip() {
-        HttpEntity<FriendShip> httpEntity = new HttpEntity<>(createFriendShip());
+        HttpEntity<FriendShip> httpEntity = new HttpEntity<>(createFriendShip(1, 3));
         ResponseEntity<FriendShip[]> responseEntity = template.getForEntity(baseURL.toString(), FriendShip[].class);
-        assertEquals(0, responseEntity.getBody().length);
+        assertEquals(3, responseEntity.getBody().length);
 
         template.postForObject(baseURL.toString(), httpEntity, FriendShip.class);
         responseEntity = template.getForEntity(baseURL.toString(), FriendShip[].class);
-        assertEquals(1, responseEntity.getBody().length);
+        assertEquals(4, responseEntity.getBody().length);
     }
 
-    public FriendShip createFriendShip() {
-        User userFrom = userRepository.findById(1);
-        User userTo = userRepository.findById(2);
+    @Test
+    public void whenGetAllFriendsByUser_ThenReturnAllHisFriends() {
+        HttpEntity<FriendShip> httpEntity = new HttpEntity<>(createFriendShip(4, 3));
+        template.postForObject(baseURL.toString(), httpEntity, FriendShip.class);
+        ResponseEntity<User[]> responseEntity = template.getForEntity(baseURL.toString() + "/3", User[].class);
+        assertEquals(2, responseEntity.getBody().length);
+
+    }
+
+    public FriendShip createFriendShip(int id1, int id2) {
+        User userFrom = userRepository.findById(id1);
+        User userTo = userRepository.findById(id2);
         return new FriendShip(userFrom, userTo);
     }
 }
