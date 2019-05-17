@@ -33,7 +33,7 @@ public class UNowApplication {
 
             activityRepository.save(new Activity(userRepository.findById(1L), ActivityType.WORK, new Date()));
             activityRepository.save(new Activity(userRepository.findById(2L), ActivityType.SPORT, new Date()));
-            activityRepository.save(new Activity(userRepository.findById(3L), ActivityType.STUDY, new Date()));
+            activityRepository.save(new Activity(userRepository.findById(3L), ActivityType.MUSIC, new Date()));
 
             friendShipRepository.save(new FriendShip(userRepository.findById(1L), userRepository.findById(2L)));
             friendShipRepository.save(new FriendShip(userRepository.findById(3L), userRepository.findById(1L)));
