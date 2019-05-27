@@ -31,9 +31,9 @@ public class UNowApplication {
             userRepository.save(new User("Manon", "Baudry", "man.baudry@gmail.com", "azerty", "52 rua de Heroismo", "0679065306"));
             userRepository.save(new User("Jackie", "Kennedy", "ccvolvic@hotmail.com", "azerty", "Saint Amand", "0631440224"));
 
-            activityRepository.save(new Activity(userRepository.findById(1L), ActivityType.WORK, new Date()));
-            activityRepository.save(new Activity(userRepository.findById(2L), ActivityType.SPORT, new Date()));
-            activityRepository.save(new Activity(userRepository.findById(3L), ActivityType.MUSIC, new Date()));
+            activityRepository.save(new Activity(userRepository.findById(1L), ActivityType.WORK, new Date(), 0));
+            activityRepository.save(new Activity(userRepository.findById(2L), ActivityType.SPORT, new Date(), 0));
+            activityRepository.save(new Activity(userRepository.findById(3L), ActivityType.MUSIC, new Date(), 0));
 
             friendShipRepository.save(new FriendShip(userRepository.findById(1L), userRepository.findById(2L)));
             friendShipRepository.save(new FriendShip(userRepository.findById(3L), userRepository.findById(1L)));

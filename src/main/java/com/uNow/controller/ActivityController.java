@@ -55,4 +55,18 @@ public class ActivityController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void userNotFoundHandler(UserNotFoundException e) {
     }
+
+    @CrossOrigin
+    @GetMapping("/{userId}/{activityId}")
+    public Activity getActivityById(@PathVariable("userId") Long userId, @PathVariable("activityId") long activityId) {
+        return activityRepository.findById(activityId).get();
+    }
+
+    @CrossOrigin
+    @PutMapping
+    public void addLike(@RequestBody Activity activity) {
+        activity.setLikes(activity.getLikes() + 1);
+        activityRepository.save(activity);
+    }
+
 }

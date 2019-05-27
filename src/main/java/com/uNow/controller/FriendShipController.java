@@ -46,7 +46,7 @@ public class FriendShipController {
             userExist = true;
             userFromFriendship = friendShipRepository.findByUserFrom(userRepository.findById(id).get());
             for (FriendShip friendship : userFromFriendship) {
-                if (friendship.getUserFrom().getId() != id && !result.contains(friendship.getUserFrom())) {
+                if (friendship.getUserFrom().getId() != id) {
                     result.add(friendship.getUserFrom());
                 } else {
                     result.add(friendship.getUserTo());
@@ -58,7 +58,7 @@ public class FriendShipController {
             userExist = true;
             userToFriendship = friendShipRepository.findByUserTo(userRepository.findById(id).get());
             for (FriendShip friendship : userToFriendship) {
-                if (friendship.getUserFrom().getId() != id && !result.contains(friendship.getUserTo())) {
+                if (friendship.getUserFrom().getId() != id) {
                     result.add(friendship.getUserFrom());
                 } else {
                     result.add(friendship.getUserTo());

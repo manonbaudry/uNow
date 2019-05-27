@@ -5,7 +5,10 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Data
@@ -27,5 +30,8 @@ public class Activity {
 
     @NonNull
     private Date date;
+
+    @NonNull
+    private int likes;
 
 }

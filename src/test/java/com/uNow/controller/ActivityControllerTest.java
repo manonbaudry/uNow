@@ -84,9 +84,25 @@ public class ActivityControllerTest {
         assertEquals(3, response.getBody().length);
     }
 
+    @Test
+    public void whenGetActivity_ThenReturnTheActivity() {
+        ResponseEntity<Activity> response = template.getForEntity(baseURL.toString() + "/1/5", Activity.class);
+        assertEquals(0, response.getBody().getLikes());
+    }
+
+    @Test
+    public void whenAddLike_ThenLikeNumberIsIncremented() {
+        ResponseEntity<Activity> response = template.getForEntity(baseURL.toString() + "/1/5", Activity.class);
+
+        template.put(baseURL.toString(), response.getBody());
+
+        response = template.getForEntity(baseURL.toString() + "/1/5", Activity.class);
+        assertEquals(1, response.getBody().getLikes());
+    }
+
     private Activity createActivity() {
         User user = userRepository.findById(1);
-        return new Activity( user  , ActivityType.WORK, new Date());
+        return new Activity(user, ActivityType.WORK, new Date(), 0);
     }
 
 }
