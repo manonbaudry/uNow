@@ -38,12 +38,10 @@ public class FriendShipControllerTest {
     @Autowired
     private UserRepository userRepository;
 
-
     @Before
     public void setUp() throws MalformedURLException {
         this.baseURL = new URL("http://localhost:" + port + "/friendShip");
     }
-
 
     @Test
     public void whenCreateFriendShip_ThenReturnNewFriendShip() {
@@ -62,7 +60,6 @@ public class FriendShipControllerTest {
         template.postForObject(baseURL.toString(), httpEntity, FriendShip.class);
         ResponseEntity<User[]> responseEntity = template.getForEntity(baseURL.toString() + "/3", User[].class);
         assertEquals(3, responseEntity.getBody().length);
-
     }
 
     public FriendShip createFriendShip(int id1, int id2) {

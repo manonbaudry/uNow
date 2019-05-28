@@ -3,6 +3,7 @@ package com.uNow.controller;
 import com.uNow.entities.FriendRequest;
 import com.uNow.entities.FriendShip;
 import com.uNow.entities.User;
+import com.uNow.exceptions.FriendRequestNotFoundException;
 import com.uNow.exceptions.UserNotFoundException;
 import com.uNow.repositories.FriendRequestRepository;
 import com.uNow.repositories.FriendShipRepository;
@@ -79,7 +80,9 @@ public class FriendRequestController {
 
     @CrossOrigin
     @GetMapping("/getFriendRequest/{id}")
-    public FriendRequest getActivityById(@PathVariable("id") long id) {
+    public FriendRequest findById(@PathVariable("id") long id) throws FriendRequestNotFoundException {
+        if (friendRequestRepository.findById(id) == null)
+            throw new FriendRequestNotFoundException();
         return friendRequestRepository.findById(id).get();
     }
 
@@ -92,8 +95,10 @@ public class FriendRequestController {
 
     @CrossOrigin
     @DeleteMapping("/{id}")
-    public void deleteFriendRequest(@PathVariable("id") long id) {
+    public void deleteFriendRequest(@PathVariable("id") long id) throws FriendRequestNotFoundException {
         FriendRequest friendRequest = friendRequestRepository.findById(id).get();
+        if (friendRequest == null)
+            throw new FriendRequestNotFoundException();
         friendRequestRepository.delete(friendRequest);
     }
 
@@ -101,6 +106,11 @@ public class FriendRequestController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void userNotFoundHandler(UserNotFoundException e) {
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public void friendRequestNotFoundHandler(UserNotFoundException e) {
     }
 
 }
