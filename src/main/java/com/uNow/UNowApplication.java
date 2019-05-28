@@ -1,10 +1,8 @@
 package com.uNow;
 
-import com.uNow.entities.Activity;
-import com.uNow.entities.ActivityType;
-import com.uNow.entities.FriendShip;
-import com.uNow.entities.User;
+import com.uNow.entities.*;
 import com.uNow.repositories.ActivityRepository;
+import com.uNow.repositories.FriendRequestRepository;
 import com.uNow.repositories.FriendShipRepository;
 import com.uNow.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -24,7 +22,7 @@ public class UNowApplication {
 
 
     @Bean
-    CommandLineRunner init(UserRepository userRepository, ActivityRepository activityRepository, FriendShipRepository friendShipRepository) {
+    CommandLineRunner init(UserRepository userRepository, ActivityRepository activityRepository, FriendShipRepository friendShipRepository, FriendRequestRepository friendRequestRepository) {
         return args -> {
             userRepository.save(new User("Jonathan", "Wadin", "wadin.jonathan@gmail.com", "azerty", "7 rue du Levrier", "0000000000"));
             userRepository.save(new User("Arnaud", "Bascop", "nonoDu59@gmail.com", "azerty", "52 rua de Heroismo", "0605436459"));
@@ -37,7 +35,9 @@ public class UNowApplication {
 
             friendShipRepository.save(new FriendShip(userRepository.findById(1L), userRepository.findById(2L)));
             friendShipRepository.save(new FriendShip(userRepository.findById(3L), userRepository.findById(1L)));
-            friendShipRepository.save(new FriendShip(userRepository.findById(1L), userRepository.findById(4L)));
+            friendShipRepository.save(new FriendShip(userRepository.findById(3L), userRepository.findById(4L)));
+
+            friendRequestRepository.save(new FriendRequest(userRepository.findById(1L), userRepository.findById(4L)));
 
         };
     }

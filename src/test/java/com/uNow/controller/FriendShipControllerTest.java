@@ -61,7 +61,7 @@ public class FriendShipControllerTest {
         HttpEntity<FriendShip> httpEntity = new HttpEntity<>(createFriendShip(4, 3));
         template.postForObject(baseURL.toString(), httpEntity, FriendShip.class);
         ResponseEntity<User[]> responseEntity = template.getForEntity(baseURL.toString() + "/3", User[].class);
-        assertEquals(2, responseEntity.getBody().length);
+        assertEquals(3, responseEntity.getBody().length);
 
     }
 

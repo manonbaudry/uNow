@@ -57,8 +57,8 @@ public class ActivityController {
     }
 
     @CrossOrigin
-    @GetMapping("/{userId}/{activityId}")
-    public Activity getActivityById(@PathVariable("userId") Long userId, @PathVariable("activityId") long activityId) {
+    @GetMapping("/getActivity/{activityId}")
+    public Activity getActivityById(@PathVariable("activityId") long activityId) {
         return activityRepository.findById(activityId).get();
     }
 
