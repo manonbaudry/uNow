@@ -38,7 +38,7 @@ public class ActivityController {
     }
 
     @CrossOrigin
-    @GetMapping("/getActivity/{activityId}")
+    @GetMapping("/by-activity/{activityId}")
     public Activity findById(@PathVariable("activityId") long activityId) throws ActivityNotFoundException {
         if (activityRepository.findById(activityId).get() == null)
             throw new ActivityNotFoundException();

@@ -65,13 +65,13 @@ public class FriendRequestControllerTest {
 
     @Test
     public void whenGetFriendRequest_ThenReturnTheFriendRequest() {
-        ResponseEntity<FriendRequest> response = template.getForEntity(baseURL.toString() + "/friendRequest/getFriendRequest/11", FriendRequest.class);
+        ResponseEntity<FriendRequest> response = template.getForEntity(baseURL.toString() + "/friendRequest/by-friendRequest/11", FriendRequest.class);
         assertEquals(11, response.getBody().getId());
     }
 
     @Test
     public void whenFriendRequestIsAccepted_ThenFriendShipIsCreated() {
-        ResponseEntity<FriendRequest> responseEntity = template.getForEntity(baseURL.toString() + "/friendRequest/getFriendRequest/11", FriendRequest.class);
+        ResponseEntity<FriendRequest> responseEntity = template.getForEntity(baseURL.toString() + "/friendRequest/by-friendRequest/11", FriendRequest.class);
         template.put(baseURL.toString() + "/friendRequest", responseEntity.getBody());
 
         ResponseEntity<FriendShip[]> responseFriendShip = template.getForEntity((baseURL.toString()) + "friendShip/4", FriendShip[].class);

@@ -79,7 +79,7 @@ public class FriendRequestController {
     }
 
     @CrossOrigin
-    @GetMapping("/getFriendRequest/{id}")
+    @GetMapping("/by-friendRequest/{id}")
     public FriendRequest findById(@PathVariable("id") long id) throws FriendRequestNotFoundException {
         if (friendRequestRepository.findById(id) == null)
             throw new FriendRequestNotFoundException();

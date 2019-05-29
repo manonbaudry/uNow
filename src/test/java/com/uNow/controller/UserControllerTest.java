@@ -41,7 +41,6 @@ public class UserControllerTest {
     @Test
     public void whenCreateUser_ThenReturnNewUser() {
 
-
        HttpEntity<User> userHttpEntity = new HttpEntity<>(createUser("jonathan.wadin@gmail.com"));
 
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString(), User[].class);

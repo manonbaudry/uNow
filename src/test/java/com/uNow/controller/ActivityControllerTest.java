@@ -86,17 +86,17 @@ public class ActivityControllerTest {
 
     @Test
     public void whenGetActivity_ThenReturnTheActivity() {
-        ResponseEntity<Activity> response = template.getForEntity(baseURL.toString() + "/getActivity/5", Activity.class);
+        ResponseEntity<Activity> response = template.getForEntity(baseURL.toString() + "/by-activity/5", Activity.class);
         assertEquals(0, response.getBody().getLikes());
     }
 
     @Test
     public void whenAddLike_ThenLikeNumberIsIncremented() {
-        ResponseEntity<Activity> response = template.getForEntity(baseURL.toString() + "/getActivity/5", Activity.class);
+        ResponseEntity<Activity> response = template.getForEntity(baseURL.toString() + "/by-activity/5", Activity.class);
 
         template.put(baseURL.toString(), response.getBody());
 
-        response = template.getForEntity(baseURL.toString() + "/getActivity/5", Activity.class);
+        response = template.getForEntity(baseURL.toString() + "/by-activity/5", Activity.class);
         assertEquals(1, response.getBody().getLikes());
     }
 
