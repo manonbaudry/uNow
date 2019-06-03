@@ -2,7 +2,7 @@ package com.uNow.controller;
 
 import com.uNow.entities.User;
 import com.uNow.exceptions.AlreadyExistEmailException;
-import com.uNow.exceptions.UserNotFoundException;
+import com.uNow.exceptions.IdNotFoundException;
 import com.uNow.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,16 +26,17 @@ public class UserController {
 
     @CrossOrigin
     @GetMapping("/{id}")
-    public User findById(@PathVariable("id") long id) throws UserNotFoundException {
+    public User findById(@PathVariable("id") long id) throws IdNotFoundException {
         if (userRepository.findById(id) == null) {
-            throw new UserNotFoundException();
+            throw new IdNotFoundException();
         }
         return userRepository.findById(id);
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void userNotFoundHandler(UserNotFoundException e){}
+    public void idNotFoundHandler(IdNotFoundException e) {
+    }
 
     @CrossOrigin
     @PostMapping
@@ -55,7 +56,4 @@ public class UserController {
         userRepository.save(userToUpdate);
         return userRepository.findById(userUpdated.getId());
     }
-
-
-
 }

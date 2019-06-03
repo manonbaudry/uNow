@@ -2,7 +2,7 @@ package com.uNow.controller;
 
 import com.uNow.entities.FriendShip;
 import com.uNow.entities.User;
-import com.uNow.exceptions.UserNotFoundException;
+import com.uNow.exceptions.IdNotFoundException;
 import com.uNow.repositories.FriendShipRepository;
 import com.uNow.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class FriendShipController {
 
     @CrossOrigin
     @GetMapping("/{userId}")
-    public List<User> getAllFriendsByUser(@PathVariable("userId") Long id) throws UserNotFoundException {
+    public List<User> getAllFriendsByUser(@PathVariable("userId") Long id) throws IdNotFoundException {
         List<FriendShip> userFromFriendship;
         List<FriendShip> userToFriendship;
         List<User> result = new ArrayList<>();
@@ -67,14 +67,14 @@ public class FriendShipController {
         }
 
         if (!userExist)
-            throw new UserNotFoundException();
+            throw new IdNotFoundException();
 
         return result;
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void userNotFoundHandler(UserNotFoundException e) {
+    public void idNotFoundHandler(IdNotFoundException e) {
     }
 
 }

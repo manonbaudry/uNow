@@ -3,8 +3,7 @@ package com.uNow.controller;
 import com.uNow.entities.FriendRequest;
 import com.uNow.entities.FriendShip;
 import com.uNow.entities.User;
-import com.uNow.exceptions.FriendRequestNotFoundException;
-import com.uNow.exceptions.UserNotFoundException;
+import com.uNow.exceptions.IdNotFoundException;
 import com.uNow.repositories.FriendRequestRepository;
 import com.uNow.repositories.FriendShipRepository;
 import com.uNow.repositories.UserRepository;
@@ -42,7 +41,7 @@ public class FriendRequestController {
 
     @CrossOrigin
     @GetMapping("/{userId}")
-    public List<User> getAllFriendRequestByUser(@PathVariable("userId") long userId) throws UserNotFoundException {
+    public List<User> getAllFriendRequestByUser(@PathVariable("userId") long userId) throws IdNotFoundException {
         List<FriendRequest> userFromFriendRequest;
         List<FriendRequest> userToFriendRequest;
         List<User> result = new ArrayList<>();
@@ -73,16 +72,16 @@ public class FriendRequestController {
         }
 
         if (!userExist)
-            throw new UserNotFoundException();
+            throw new IdNotFoundException();
 
         return result;
     }
 
     @CrossOrigin
     @GetMapping("/by-friendRequest/{id}")
-    public FriendRequest findById(@PathVariable("id") long id) throws FriendRequestNotFoundException {
+    public FriendRequest findById(@PathVariable("id") long id) throws IdNotFoundException {
         if (friendRequestRepository.findById(id) == null)
-            throw new FriendRequestNotFoundException();
+            throw new IdNotFoundException();
         return friendRequestRepository.findById(id).get();
     }
 
@@ -95,22 +94,16 @@ public class FriendRequestController {
 
     @CrossOrigin
     @DeleteMapping("/{id}")
-    public void deleteFriendRequest(@PathVariable("id") long id) throws FriendRequestNotFoundException {
+    public void deleteFriendRequest(@PathVariable("id") long id) throws IdNotFoundException {
         FriendRequest friendRequest = friendRequestRepository.findById(id).get();
         if (friendRequest == null)
-            throw new FriendRequestNotFoundException();
+            throw new IdNotFoundException();
         friendRequestRepository.delete(friendRequest);
     }
 
-
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void userNotFoundHandler(UserNotFoundException e) {
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void friendRequestNotFoundHandler(UserNotFoundException e) {
+    public void idNotFoundHandler(IdNotFoundException e) {
     }
 
 }
