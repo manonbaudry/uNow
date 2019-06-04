@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -76,7 +77,6 @@ public class FriendRequestControllerTest {
 
         ResponseEntity<FriendShip[]> responseFriendShip = template.getForEntity((baseURL.toString()) + "friendShip/4", FriendShip[].class);
         assertEquals(2, responseFriendShip.getBody().length);
-
     }
 
     @Test
@@ -85,6 +85,18 @@ public class FriendRequestControllerTest {
 
         ResponseEntity<User[]> response = template.getForEntity(baseURL.toString() + "/friendRequest/4", User[].class);
         assertEquals(0, response.getBody().length);
+    }
+
+    @Test
+    public void whenFindByIdWhoDoesntExist_ThenReturn404() {
+        ResponseEntity<String> response = template.getForEntity(baseURL.toString() + "/friendRequest/99", String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void whenFindByUserIdWhoDoesntExist_ThenReturn404() {
+        ResponseEntity<String> response = template.getForEntity(baseURL.toString() + "/friendRequest/by-friendRequest/99", String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     public FriendRequest createFriendRequest(int id1, int id2) {

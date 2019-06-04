@@ -36,17 +36,18 @@ public class FriendShipController {
 
     @CrossOrigin
     @GetMapping("/{userId}")
-    public List<User> getAllFriendsByUser(@PathVariable("userId") Long id) throws IdNotFoundException {
+    public List<User> getAllFriendsByUser(@PathVariable("userId") Long userId) throws IdNotFoundException {
+        if (!userRepository.existsById(userId))
+            throw new IdNotFoundException();
+
         List<FriendShip> userFromFriendship;
         List<FriendShip> userToFriendship;
         List<User> result = new ArrayList<>();
-        boolean userExist = false;
 
-        if (friendShipRepository.findByUserFrom(userRepository.findById(id).get()) != null) {
-            userExist = true;
-            userFromFriendship = friendShipRepository.findByUserFrom(userRepository.findById(id).get());
+        if (friendShipRepository.findByUserFrom(userRepository.findById(userId).get()) != null) {
+            userFromFriendship = friendShipRepository.findByUserFrom(userRepository.findById(userId).get());
             for (FriendShip friendship : userFromFriendship) {
-                if (friendship.getUserFrom().getId() != id) {
+                if (friendship.getUserFrom().getId() != userId) {
                     result.add(friendship.getUserFrom());
                 } else {
                     result.add(friendship.getUserTo());
@@ -54,20 +55,16 @@ public class FriendShipController {
             }
         }
 
-        if (friendShipRepository.findByUserTo(userRepository.findById(id).get()) != null) {
-            userExist = true;
-            userToFriendship = friendShipRepository.findByUserTo(userRepository.findById(id).get());
+        if (friendShipRepository.findByUserTo(userRepository.findById(userId).get()) != null) {
+            userToFriendship = friendShipRepository.findByUserTo(userRepository.findById(userId).get());
             for (FriendShip friendship : userToFriendship) {
-                if (friendship.getUserFrom().getId() != id) {
+                if (friendship.getUserFrom().getId() != userId) {
                     result.add(friendship.getUserFrom());
                 } else {
                     result.add(friendship.getUserTo());
                 }
             }
         }
-
-        if (!userExist)
-            throw new IdNotFoundException();
 
         return result;
     }

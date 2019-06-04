@@ -39,7 +39,7 @@ public class ActivityController {
     @CrossOrigin
     @GetMapping("/by-activity/{activityId}")
     public Activity findById(@PathVariable("activityId") long activityId) throws IdNotFoundException {
-        if (activityRepository.findById(activityId).get() == null)
+        if (!activityRepository.existsById(activityId))
             throw new IdNotFoundException();
         return activityRepository.findById(activityId).get();
     }
@@ -47,9 +47,9 @@ public class ActivityController {
     @CrossOrigin
     @GetMapping("/{userId}")
     public List<Activity> findAllByUser(@PathVariable("userId") Long userId) throws IdNotFoundException {
-        User user = userRepository.findById(userId).get();
-        if(activityRepository.findByUser(user) == null)
+        if (!userRepository.existsById(userId))
             throw new IdNotFoundException();
+        User user = userRepository.findById(userId).get();
         return activityRepository.findByUser(user);
     }
 
@@ -76,6 +76,11 @@ public class ActivityController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void idNotFoundHandler(IdNotFoundException e) {
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void badRequestHandler(BadRequestException e) {
     }
 
 

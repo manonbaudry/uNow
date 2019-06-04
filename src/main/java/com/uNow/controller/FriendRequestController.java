@@ -42,13 +42,14 @@ public class FriendRequestController {
     @CrossOrigin
     @GetMapping("/{userId}")
     public List<User> getAllFriendRequestByUser(@PathVariable("userId") long userId) throws IdNotFoundException {
+        if (!userRepository.existsById(userId))
+            throw new IdNotFoundException();
+
         List<FriendRequest> userFromFriendRequest;
         List<FriendRequest> userToFriendRequest;
         List<User> result = new ArrayList<>();
-        boolean userExist = false;
 
         if (friendRequestRepository.findByUserFrom(userRepository.findById(userId)) != null) {
-            userExist = true;
             userFromFriendRequest = friendRequestRepository.findByUserFrom(userRepository.findById(userId));
             for (FriendRequest friendRequest : userFromFriendRequest) {
                 if (friendRequest.getUserFrom().getId() != userId) {
@@ -60,7 +61,6 @@ public class FriendRequestController {
         }
 
         if (friendRequestRepository.findByUserTo(userRepository.findById(userId)) != null) {
-            userExist = true;
             userToFriendRequest = friendRequestRepository.findByUserTo(userRepository.findById(userId));
             for (FriendRequest friendRequest : userToFriendRequest) {
                 if (friendRequest.getUserFrom().getId() != userId) {
@@ -71,16 +71,13 @@ public class FriendRequestController {
             }
         }
 
-        if (!userExist)
-            throw new IdNotFoundException();
-
         return result;
     }
 
     @CrossOrigin
     @GetMapping("/by-friendRequest/{id}")
     public FriendRequest findById(@PathVariable("id") long id) throws IdNotFoundException {
-        if (friendRequestRepository.findById(id) == null)
+        if (!friendRequestRepository.existsById(id))
             throw new IdNotFoundException();
         return friendRequestRepository.findById(id).get();
     }

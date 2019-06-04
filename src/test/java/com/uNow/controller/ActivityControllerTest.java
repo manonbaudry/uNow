@@ -100,6 +100,18 @@ public class ActivityControllerTest {
         assertEquals(1, response.getBody().getLikes());
     }
 
+    @Test
+    public void whenFindActivityByIdWhoDoesntExist_ThenReturn404() {
+        ResponseEntity<String> response = template.getForEntity(baseURL.toString() + "/by-activity/99", String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void whenFindByUserIdWhoDoesntExist_ThenReturn404() {
+        ResponseEntity<String> response = template.getForEntity(baseURL.toString() + "/99", String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
     private Activity createActivity() {
         User user = userRepository.findById(1);
         return new Activity(user, ActivityType.WORK, new Date(), 0);

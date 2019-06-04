@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -61,6 +62,13 @@ public class FriendShipControllerTest {
         ResponseEntity<User[]> responseEntity = template.getForEntity(baseURL.toString() + "/3", User[].class);
         assertEquals(3, responseEntity.getBody().length);
     }
+
+    @Test
+    public void whenFindByIdWhoDoesntExist_ThenReturn404() {
+        ResponseEntity<String> response = template.getForEntity(baseURL.toString() + "/friendShip/99", String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
 
     public FriendShip createFriendShip(int id1, int id2) {
         User userFrom = userRepository.findById(id1);
