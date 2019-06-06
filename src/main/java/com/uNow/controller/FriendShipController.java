@@ -74,4 +74,12 @@ public class FriendShipController {
     public void idNotFoundHandler(IdNotFoundException e) {
     }
 
+    @CrossOrigin
+    @DeleteMapping("/{id}")
+    public void deleteFriendShip(@PathVariable("id") long id) throws IdNotFoundException {
+        FriendShip friendShip = friendShipRepository.findById(id).get();
+        if (friendShip == null)
+            throw new IdNotFoundException();
+        friendShipRepository.delete(friendShip);
+    }
 }
