@@ -32,6 +32,9 @@ public class Activity {
     private Date date;
 
     @NonNull
+    private String currentLocation;
+
+    @NonNull
     private int likes;
 
 }

@@ -114,7 +114,7 @@ public class ActivityControllerTest {
 
     private Activity createActivity() {
         User user = userRepository.findById(1);
-        return new Activity(user, ActivityType.WORK, new Date(), 0);
+        return new Activity(user, ActivityType.WORK, new Date(), user.getLocation(), 0);
     }
 
 }
