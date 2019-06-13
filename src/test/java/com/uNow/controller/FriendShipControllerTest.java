@@ -69,6 +69,14 @@ public class FriendShipControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
+    @Test
+    public void whenDeleteFriendShip_ThenFriendShipIsDeleted() {
+        template.delete(baseURL.toString() + "/9");
+
+        ResponseEntity<User[]> response = template.getForEntity(baseURL.toString() + "/3", User[].class);
+        assertEquals(1, response.getBody().length);
+    }
+
 
     public FriendShip createFriendShip(int id1, int id2) {
         User userFrom = userRepository.findById(id1);
