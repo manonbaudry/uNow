@@ -37,4 +37,6 @@ public class Activity {
     @NonNull
     private int likes;
 
+    private String activityDetail;
+
 }
