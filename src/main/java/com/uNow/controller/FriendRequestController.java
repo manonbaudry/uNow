@@ -92,9 +92,9 @@ public class FriendRequestController {
     @CrossOrigin
     @DeleteMapping("/{id}")
     public void deleteFriendRequest(@PathVariable("id") long id) throws IdNotFoundException {
-        FriendRequest friendRequest = friendRequestRepository.findById(id).get();
-        if (friendRequest == null)
+        if (!friendRequestRepository.existsById(id))
             throw new IdNotFoundException();
+        FriendRequest friendRequest = friendRequestRepository.findById(id).get();
         friendRequestRepository.delete(friendRequest);
     }
 
